@@ -24,8 +24,17 @@ public class WhiskyRepositoryImpl implements WhiskyRepositoryCustom {
         cr.add(Restrictions.eq("year", year));
         results = cr.list();
         return results;
+    }
 
-
+    @Transactional
+    public List <Whisky> getWhiskiesFromRegion(String region) {
+        List<Whisky> results = null;
+        Session session = entityManager.unwrap(Session.class);
+        Criteria cr = session.createCriteria(Whisky.class);
+        cr.createAlias("distillery", "distillery");
+        cr.add(Restrictions.eq("distillery.region", region).ignoreCase());
+        results = cr.list();
+        return results;
     }
 
 }
