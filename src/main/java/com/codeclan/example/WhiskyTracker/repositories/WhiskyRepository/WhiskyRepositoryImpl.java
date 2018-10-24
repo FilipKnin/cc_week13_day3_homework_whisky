@@ -17,11 +17,11 @@ public class WhiskyRepositoryImpl implements WhiskyRepositoryCustom {
     EntityManager entityManager;
 
     @Transactional
-    public List<Whisky> findAllWhiskiesForParticularYear(int age) {
+    public List<Whisky> findAllWhiskiesForParticularYear(int year) {
     List<Whisky> results = null;
         Session session = entityManager.unwrap(Session.class);
         Criteria cr = session.createCriteria(Whisky.class);
-        cr.add(Restrictions.gt("age", age));
+        cr.add(Restrictions.eq("year", year));
         results = cr.list();
         return results;
 
