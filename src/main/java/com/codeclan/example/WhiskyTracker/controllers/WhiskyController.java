@@ -29,6 +29,11 @@ public class WhiskyController {
         return whiskyRepository.getWhiskiesFromRegion(region);
     }
 
+    @GetMapping(value = "/ng/{distilleryName}/{age}")
+    public List <Whisky> getByDistilleryAndAge(@PathVariable String distilleryName, @PathVariable int age) {
+        return whiskyRepository.getByDistilleryAndAge(distilleryName, age);
+    }
+
 
 
 }
